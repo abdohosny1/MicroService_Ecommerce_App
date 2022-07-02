@@ -1,7 +1,7 @@
 # MicroServiceEcommerce
 
-run docker compose
+run docker compose ===>
 docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d
 
-stop docker compose
+stop docker compose ===>
 docker-compose -f docker-compose.yml -f docker-compose.override.yml down
