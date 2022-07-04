@@ -13,9 +13,4 @@ link pgadmin ===> http://localhost:5050/login?next=%2F
 link portainer  ===>http://localhost:9000/#!/auth
 
 
-Abdulaleem@hitstechnology.com 
-Abdulaleem@hitstechnology.com 
-OMTI6HzzUx 
 
-
-http://hitsservices.cloudapp.net/HITSHR/logon.aspx?ReturnUrl=%2fHITSHR%2fDefault.aspx
