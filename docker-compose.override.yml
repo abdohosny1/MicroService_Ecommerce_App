@@ -16,6 +16,14 @@ services:
      ports:
        - "6379:6379"
 
+   #add rabbitmq
+   rabbitmq:
+       container_name: rabbitmq
+       restart: always
+       ports:
+           - "5672:5672"
+           - "15672:15672"
+
    # add portiner
    portainer:
      container_name: portainer
@@ -63,15 +71,18 @@ services:
      ports:
       - "8000:80"
 
+      #add basket
    basketapii:
-    container_name: basketapii
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - "CacheSettings:ConnectionString=basketdb:6379"
-    depends_on:
-      - basketdb
-    ports:
-      - "8001:80"
+     container_name: basketapii
+     environment:
+       - ASPNETCORE_ENVIRONMENT=Development
+       - "CacheSettings:ConnectionString=basketdb:6379"
+       - "EventBus:HostName=rabbitmq"
+     depends_on:
+       - basketdb
+       - rabbitmq
+     ports:
+       - "8001:80"
 
 
    discount.api:

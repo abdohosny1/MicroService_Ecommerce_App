@@ -8,5 +8,7 @@ namespace BasketApii.Repositories.interfaces
         Task<ShoppingCart> GetBasket(string userName);
         Task<ShoppingCart> UpdateBasket(ShoppingCart basket);
         Task DeleteBasket(string userName);
+       // Task<bool> DeleteBaskett(string userName);
+
     }
 }
