@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using BasketApii.Entities;
 using BasketApii.Repositories.interfaces;
-using EventBusRabbitMQ.Common;
-using EventBusRabbitMQ.Events;
-using EventBusRabbitMQ.Producer;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -19,14 +17,14 @@ namespace BasketApii.Controllers
     {
 
         private readonly IBasketRepository _repository;
-        private readonly EventBusRabbitMQProducer _eventBus;
+      //  private readonly EventBusRabbitMQProducer _eventBus;
         private readonly ILogger<BasketController> _logger;
         private readonly IMapper _mapper;
 
-        public BasketController(IBasketRepository repository, EventBusRabbitMQProducer eventBus, IMapper mapper, ILogger<BasketController> logger)
+        public BasketController(IBasketRepository repository,  IMapper mapper, ILogger<BasketController> logger)
         {
             _repository = repository;
-            _eventBus = eventBus;
+        //    _eventBus = eventBus;
             _logger = logger;
             _mapper = mapper;
         }
@@ -89,17 +87,17 @@ namespace BasketApii.Controllers
             // ordering.api to convert basket to order and proceeds with
             // order creation process
 
-            var eventMessage = _mapper.Map<BasketCheckoutEvent>(basketCheckout);
-            eventMessage.RequestId = Guid.NewGuid();
-            eventMessage.TotalPrice = basket.TotalPrice;
+          ///  var eventMessage = _mapper.Map<BasketCheckoutEvent>(basketCheckout);
+          //  eventMessage.RequestId = Guid.NewGuid();
+           // eventMessage.TotalPrice = basket.TotalPrice;
 
             try
             {
-                _eventBus.PublishBasketCheckout(EventBusConstants.BasketCheckoutQueue, eventMessage);
+              //  _eventBus.PublishBasketCheckout(EventBusConstants.BasketCheckoutQueue, eventMessage);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "ERROR Publishing integration event: {EventId} from {AppName}", eventMessage.RequestId, "Basket");
+              //  _logger.LogError(ex, "ERROR Publishing integration event: {EventId} from {AppName}", eventMessage.RequestId, "Basket");
                 throw;
             }
 

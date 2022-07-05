@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace OrderingInfrastructure.Data
 {
-  public  class OrderContect : DbContext
+  public  class OrderContext : DbContext
     {
 
-        public OrderContect(DbContextOptions<OrderContect> options):base(options)
+        public OrderContext(DbContextOptions<OrderContext> options):base(options)
         {
 
         }
