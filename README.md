@@ -13,4 +13,8 @@ link pgadmin ===> http://localhost:5050/login?next=%2F
 link portainer  ===>http://localhost:9000/#!/auth
 
 
+SELECT sname,grade,cname,
+	   Prod_prev=lAG(grade) OVER(partition by Cname ORDER BY grade),
+	   Prod_Next=LEAD(grade) OVER(partition by Cname ORDER BY grade)
+FROM grades
 
