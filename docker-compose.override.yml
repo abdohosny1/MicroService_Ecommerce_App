@@ -121,3 +121,17 @@ services:
       ports:
          - "8005:80"
 
+
+   ocelotapigw:
+      container_name: ocelotapigw
+      environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        #- "ElasticConfiguration:Uri=http://elasticsearch:9200"
+      depends_on:
+        - catalogapi
+        - basketapii
+        - discount.api
+        - orderapi
+      ports:
+        - "8010:80"
+
