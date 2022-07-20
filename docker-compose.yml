@@ -20,8 +20,8 @@ services:
         image: rabbitmq:3-management-alpine
 
   orderdb:
-      # image: mcr.microsoft.com/mssql/server
-        image: mcr.microsoft.com/mssql/server:2017-latest
+       image: mcr.microsoft.com/mssql/server
+       # image: mcr.microsoft.com/mssql/server:2017-latest
 
 
   catalogapi:

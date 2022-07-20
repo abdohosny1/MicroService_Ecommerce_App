@@ -31,20 +31,37 @@ namespace OcelotApiGw
         //        });
         //}
 
+        //    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        //        Host.CreateDefaultBuilder(args)
+        //                 .ConfigureAppConfiguration((hostingContext, config) =>
+        //                 {
+        //                     config.AddJsonFile($"ocelot.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true);
+        //                 })
+        //            .ConfigureWebHostDefaults(webBuilder =>
+        //            {
+        //                webBuilder.UseStartup<Startup>();
+        //            }).ConfigureLogging((hositingContect, loggingBulider) =>
+        //            {
+        //                loggingBulider.AddConfiguration(hositingContect
+        //                    .Configuration.GetSection("Logging"));
+        //                loggingBulider.AddConsole();
+        //                loggingBulider.AddDebug();
+        //            });
+        //}
+
         public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
-                     .ConfigureAppConfiguration((hostingContext, config) =>
-                     {
-                         config.AddJsonFile($"ocelot.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true);
-                     })
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                }).ConfigureLogging((hositingContect, loggingBulider) =>
-                {
-                    loggingBulider.AddConfiguration(hositingContect.Configuration.GetSection("Logging"));
-                    loggingBulider.AddConsole();
-                    loggingBulider.AddDebug();
-                });
+           Host.CreateDefaultBuilder(args)
+               .ConfigureWebHostDefaults(webBuilder =>
+               {
+                   webBuilder.UseStartup<Startup>();
+               })
+           .ConfigureAppConfiguration((hostingContext, config) =>
+           {
+               config.AddJsonFile($"osl.json");
+
+               // for local test use below one, multi env json file not worked
+               //config.AddJsonFile($"configuration.{hostingContext.HostingEnvironment.EnvironmentName}.json", true, true);
+               // https://github.com/ThreeMammals/Ocelot/issues/249
+           });
     }
-}
+    }
