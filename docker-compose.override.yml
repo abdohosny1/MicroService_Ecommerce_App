@@ -4,12 +4,13 @@ services:
    catalogdb:
      container_name: catalogdb
      restart: always
-     volumes:
-        #- mongo_data:/data/db
-       # - ${WEBAPP_STORAGE_HOME}/site:/data/db
-       - ./data:/data/db
      ports:
-            - "27017:27017"
+         - "27017:27017"
+     volumes:
+        - mongo_data:/data/db
+       # - ${WEBAPP_STORAGE_HOME}/site:/data/db
+       #- ./data:/data/db
+
    basketdb:
      container_name: basketdb
      restart: always    
@@ -74,7 +75,7 @@ services:
      container_name: catalogapi
      environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - "CatalogDatabaseSettings:ConnectionString=mongodb://catalogdb:27017"
+      - "DatabaseSettings:ConnectionString=mongodb://catalogdb:27017"
      depends_on:
       - catalogdb
      ports:

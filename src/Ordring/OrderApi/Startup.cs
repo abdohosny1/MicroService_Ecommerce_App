@@ -41,7 +41,7 @@ namespace OrderApi
         {
 
             services.AddDbContext<OrderContext>(c =>
-             c.UseSqlServer(Configuration.GetConnectionString("OrderConnection")), ServiceLifetime.Singleton); // we made singleton this in order to resolve in mediatR when consuming Rabbit
+             c.UseSqlServer(Configuration.GetConnectionString("OrderConnection"))); // we made singleton this in order to resolve in mediatR when consuming Rabbit
 
 
             // Add Infrastructure Layer

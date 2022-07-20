@@ -3,11 +3,14 @@ using CatalogApi.Data.interfaces;
 using CatalogApi.Repositories;
 using CatalogApi.Repositories.Interfaces;
 using CatalogApi.Setting;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -35,9 +38,8 @@ namespace CatalogApi
             services.AddControllers();
 
             //add catalog connectiomn string
-            services.Configure<CatalogDatabaseSettings>(Configuration.GetSection(nameof(CatalogDatabaseSettings)));
-
-
+            // services.Configure<CatalogDatabaseSettings>(Configuration.GetSection(nameof(CatalogDatabaseSettings)));
+            
             services.AddSingleton<ICatalogDatabaseSettings>(sp =>
                 sp.GetRequiredService<IOptions<CatalogDatabaseSettings>>().Value);
             //services.AddSingleton<ICatalogDatabaseSettings, CatalogDatabaseSettings>();
@@ -49,6 +51,10 @@ namespace CatalogApi
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CatalogApi", Version = "v1" });
             });
+
+            services.AddHealthChecks()
+                    .AddMongoDb(Configuration["DatabaseSettings:ConnectionString"], "MongoDb Health", HealthStatus.Degraded);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -68,6 +74,11 @@ namespace CatalogApi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHealthChecks("/hc", new HealthCheckOptions()
+                {
+                    Predicate = _ => true,
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+                });
             });
         }
     }
