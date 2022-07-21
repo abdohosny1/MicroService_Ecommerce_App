@@ -23,8 +23,8 @@ namespace AspnetRunBasics.ApiCollection
         public async Task<BasketModel> GetBasket(string userName)
         {
             var message = new HttpRequestBuilder(_settings.BaseAddress)
-                               .SetPath(_settings.BasketPath)
-                               .AddQueryString("username", userName)
+                               .SetPath(_settings.BasketPath+"/"+userName)
+                               //.AddQueryString("username", userName)
                                .HttpMethod(HttpMethod.Get)
                                .GetHttpMessage();
 

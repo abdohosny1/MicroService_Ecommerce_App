@@ -19,9 +19,9 @@ namespace AspnetRunBasics
 
         public BasketModel Cart { get; set; } = new BasketModel();
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(string userName ="swn")
         {
-            var userName = "swn";
+            //var userName = "swn";
             Cart = await _basketApi.GetBasket(userName);
 
             return Page();

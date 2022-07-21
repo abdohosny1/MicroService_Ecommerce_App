@@ -1,16 +1,16 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-FROM mcr.microsoft.com/dotnet/aspnet:5.0-buster-slim AS base
+FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
 EXPOSE 80
 EXPOSE 443
 
-FROM mcr.microsoft.com/dotnet/sdk:5.0-buster-slim AS build
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["src/WebApp/AspnetRunBasics/AspnetRunBasics.csproj", "src/WebApp/AspnetRunBasics/"]
-RUN dotnet restore "src/WebApp/AspnetRunBasics/AspnetRunBasics.csproj"
+COPY ["webApp/AspnetRunBasics/AspnetRunBasics.csproj", "webApp/AspnetRunBasics/"]
+RUN dotnet restore "webApp/AspnetRunBasics/AspnetRunBasics.csproj"
 COPY . .
-WORKDIR "/src/src/WebApp/AspnetRunBasics"
+WORKDIR "/src/webApp/AspnetRunBasics"
 RUN dotnet build "AspnetRunBasics.csproj" -c Release -o /app/build
 
 FROM build AS publish

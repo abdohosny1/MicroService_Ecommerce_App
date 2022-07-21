@@ -17,11 +17,12 @@ namespace AspnetRunBasics
             _orderApi = orderApi ?? throw new ArgumentNullException(nameof(orderApi));
         }
 
-        public IEnumerable<OrderResponseModel> Orders { get; set; } = new List<OrderResponseModel>();
+        public IEnumerable<OrderResponseModel> Orders { get; set; } = 
+            new List<OrderResponseModel>();
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(string userName="swn")
         {
-            Orders = await _orderApi.GetOrdersByUserName("swn");
+            Orders = await _orderApi.GetOrdersByUserName(userName);
 
             return Page();
         }       
