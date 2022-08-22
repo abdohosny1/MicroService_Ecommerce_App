@@ -19,8 +19,6 @@ SELECT sname,grade,cname,
 FROM grades
 
 
-![1](https://user-images.githubusercontent.com/43721664/180243035-9ad9648b-8806-48db-b218-49ef9417c5c1.PNG)
-![2](https://user-images.githubusercontent.com/43721664/180243048-4546c267-118f-4fd9-80ef-704c681c402f.PNG)
-![3](https://user-images.githubusercontent.com/43721664/180243057-ad01ff88-2ef0-4d8f-b8f3-fcf185c2297c.PNG)
+
 
 
